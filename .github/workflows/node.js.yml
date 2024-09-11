@@ -1,0 +1,81 @@
+# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
+
+name: Node.js CI
+
+on:
+  workflow_dispatch:
+
+jobs:
+  fetch:
+    runs-on: ubuntu
+    steps:
+      - name: Download artifact
+        id: download-artifact
+        uses: dawidd6/action-download-artifact@v6
+        with:
+    # Optional, GitHub token, a Personal Access Token with `public_repo` scope if needed
+    # Required, if the artifact is from a different repo
+    # Required, if the repo is private a Personal Access Token with `repo` scope is needed or GitHub token in a job where the permissions `action` scope set to `read`
+          github_token: ${{secrets.GITHUB_TOKEN}}
+    # Optional, workflow file name or ID
+    # If not specified, will be inferred from run_id (if run_id is specified), or will be the current workflow
+          workflow: npm-gulp.yml
+    # If no workflow is set and workflow_search set to true, then the most recent workflow matching
+    # all other criteria will be looked up instead of using the current workflow
+          workflow_search: false
+    # Optional, the status or conclusion of a completed workflow to search for
+    # Can be one of a workflow conclusion:
+    #   "failure", "success", "neutral", "cancelled", "skipped", "timed_out", "action_required"
+    # Or a workflow status:
+    #   "completed", "in_progress", "queued"
+    # Use the empty string ("") to ignore status or conclusion in the search
+          workflow_conclusion: success
+    # Optional, will use the specified branch. Defaults to all branches
+          branch: main
+    # Optional, defaults to all types
+          event: push
+    # Optional, will use specified workflow run
+    # use ${{ github.event.workflow_run.id }} when your action runs in a workflow_run event
+    # and wants to download from the triggering workflow run
+    # Optional, defaults to current repo
+          repo: ThreatX/threatx-user-docs-ui-default
+    # Optional, check the workflow run to whether it has an artifact
+    # then will get the last available artifact from the previous workflow
+    # default false, just try to download from the last one
+          check_artifacts: false
+    # Optional, choose to skip unpacking the downloaded artifact(s)
+    # default false
+          skip_unpack: true
+    # Optional, choose how to exit the action if no artifact is found
+    # can be one of:
+    #  "fail", "warn", "ignore"
+    # default fail
+          if_no_artifact_found: fail
+    
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x, 22.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    - run: |
+          npm install
+          npx antora --ui-bundle-url=ui-bundle.zip --url https://docs.threatx.io antora-playbook.yml
+
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v4.3.3
+      with:
+        name: site
+        path: build/site
+        if-no-files-found: error
