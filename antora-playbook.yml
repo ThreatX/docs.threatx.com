@@ -1,26 +1,39 @@
+
+runtime:
+  cache_dir: ./cache/antora
+  log:
+    failure_level: warn
+
 site:
-  title: ThreatX Prevent User Documentation
-  url: https://docs.threatx.io
-  start_page: index.adoc
+  title: ThreatX Product Documentation
+  start_page: txprevent::index.adoc
+  robots: allow
+  url: https://docs.threatx.com
+
 content:
   sources:
-    - url: https://github.com/ThreatX/threatx-user-docs.git
-      start_page: index.adoc
+    - url: https://github.com/ThreatX/threatx-docs-txprevent.git
       branches: [main]
-      edit_url: false
       start_path: docs
+
 asciidoc:
   attributes:
       experimental: true
-      copyright: '© 2024 ThreatX, Inc.'
+      copyright: '© Copyright 2024 ThreatX, Inc.'
+      hide-uri-scheme: '@'
+      idprefix: ''
+      idseparator: '-'
+      page-pagination: ''
+      table-frame: 'none@'
+      table-grid: 'rows@'
+  extensions: [ ]
+    
+output:
+  clean: true
+  dir: ./public
+
 ui:
   bundle:
-    url: https://github.com/ThreatX/threatx-user-docs-ui-default/releases/latest/download/ui-bundle.zip
+    url: https://github.com/ThreatX/threatx-user-docs-ui-default/releases/download/0.1.1/ui-bundle.zip
     snapshot: true
-  supplemental_files:
-  - path: ui.yml
-    contents: |
-      static_files:
-        - .nojekyll
-  - path: .nojekyll
 

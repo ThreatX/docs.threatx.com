@@ -4,20 +4,30 @@ antora_image ?= antora/antora:3.1.7
 url ?= https://docs.threatx.com
 
 playbook ?= antora-playbook.yml
-cache_dir ?= .cache
 output_dir ?= public
+
+antora ?= node_modules/.bin/antora
+
+.PHONY: install
+install:  ## Install dependencies
+	npm install
+
 
 .PHONY: build
 build:  ## Build the documentation site
 	@echo "⌛ Building Antora playbook ..."
-	antora \
+	$(antora) \
 		--fetch \
-		--cache-dir $(cache_dir)/antora \
 		--to-dir $(output_dir) \
 		--url $(url) \
 		$(playbook)
 	@echo "✅ Documentation site built successfully."
 	@echo "📁 Output directory: $(output_dir)"
+
+
+.PHONY: serve
+serve:  ## Start a web server to preview the site
+	npx http-server $(output_dir)
 
 
 .PHONY: help

@@ -26,15 +26,3 @@ It tells Antora where to find the Component A and Component B remote content rep
 
 After cloning this playbook project repository to your computer or setting up your own playbook for the demo site (see the {url-docs-quickstart}[Antora quickstart] for instructions) you can generate the demo site by {url-docs-run}[running Antora].
 
-== Copyright and License
-
-Copyright (C) 2024 by Threat X Inc. and the individual contributors to Antora.
-
-Use of this software is granted under the terms of the https://www.mozilla.org/en-US/MPL/2.0/[Mozilla Public License Version 2.0] (MPL-2.0).
-See link:LICENSE[] to find the full license text.
-
-== Authors
-
-Development of ThreatX User Documentation is led and sponsored by {url-opendevise}[ThreatOpenDeviseX Inc].
-
-
