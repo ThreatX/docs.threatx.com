@@ -1,0 +1,25 @@
+site:
+  title: ThreatX Product Documentation
+  url: https://docs.threatx.io
+  start_page: index.adoc
+content:
+  sources:
+    - url: https://github.com/ThreatX/threatx-manual
+      start_page: tx-docs::index.adoc
+      branches: [main]
+      edit_url: false
+      start_path: docs
+asciidoc:
+  attributes:
+      experimental: true
+ui:
+  bundle:
+    url: /Users/nick/Work/threatx-user-docs-ui-default/build/ui-bundle.zip
+    snapshot: true
+  supplemental_files:
+  - path: ui.yml
+    contents: |
+      static_files:
+        - .nojekyll
+  - path: .nojekyll
+
