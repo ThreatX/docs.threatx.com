@@ -1,20 +1,21 @@
 site:
-  title: ThreatX Product Documentation
+  title: ThreatX Prevent User Documentation
   url: https://docs.threatx.io
   start_page: index.adoc
 content:
   sources:
-    - url: https://github.com/ThreatX/threatx-manual
-      start_page: tx-docs::index.adoc
+    - url: https://github.com/ThreatX/threatx-user-docs.git
+      start_page: index.adoc
       branches: [main]
       edit_url: false
       start_path: docs
 asciidoc:
   attributes:
       experimental: true
+      copyright: '© 2024 ThreatX, Inc.'
 ui:
   bundle:
-    url: /Users/nick/Work/threatx-user-docs-ui-default/build/ui-bundle.zip
+    url: https://github.com/ThreatX/threatx-user-docs-ui-default/releases/latest/download/ui-bundle.zip
     snapshot: true
   supplemental_files:
   - path: ui.yml
