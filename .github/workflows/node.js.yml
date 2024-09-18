@@ -1,7 +1,7 @@
 # This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
 
-name: Node.js CI
+name: Build docs.threatx.com
 
 on:
   workflow_dispatch:
@@ -11,6 +11,14 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    permissions:
+      # Give the default GITHUB_TOKEN write permission to commit and push the
+      # added or changed files to the repository.
+      contents: write
+
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
     strategy:
       matrix:
@@ -32,5 +40,14 @@ jobs:
       uses: actions/upload-artifact@v4.3.3
       with:
         name: public
-        path: public
+        path: public/*
         if-no-files-found: error
+
+    - name: S3 Deploy
+      uses: Reggionick/s3-deploy@v4.0.0
+      with:
+        folder:  ./public/*
+        bucket:  docs.threatx.com
+        bucket-region: us-east-1
+        delete-removed: true
+
