@@ -32,10 +32,12 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-    - run: |
-          npm install
-          npx antora antora-playbook.yml
+    
+    - name: Install Dependencies
+      run: npm install
+      
+    - name: Generaate Site 
+      run: node_modules/.bin/antora --fetch --stacktrace antora-playbook.yml
 
     - name: S3 Deploy
       uses: Reggionick/s3-deploy@v4.0.0
