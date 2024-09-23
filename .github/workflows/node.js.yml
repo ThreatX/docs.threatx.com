@@ -37,13 +37,6 @@ jobs:
           npm install
           npx antora antora-playbook.yml
 
-    - name: Upload a Build Artifact
-      uses: actions/upload-artifact@v4.3.3
-      with:
-        name: public
-        path: public/*
-        if-no-files-found: error
-
     - name: S3 Deploy
       uses: Reggionick/s3-deploy@v4.0.0
       with:
