@@ -1,7 +1,12 @@
-#name: Build and Deploy Site
+#name: Generate
 
 on:
   workflow_dispatch:
+  push:
+    paths:
+      - "antora-playbook.yml"
+    branches:
+      - main
 
 jobs:
 
@@ -29,18 +34,7 @@ jobs:
     - name: Generate Site (Antora)
       run: |
         npx antora --fetch --stacktrace antora-playbook.yml
-        ls public
-      
-    - name: Upload Site to S3 
-      uses: jakejarvis/s3-sync-action@master
-      with:
-        args: --acl public-read --follow-symlinks --delete
-      env:
-          AWS_S3_BUCKET: docs.threatx.com
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_REGION: 'us-east-1' 
-          SOURCE_DIR: 'public'      
+        ls public  
         
     - name: Upload Site Files Build Artifact
       uses: actions/upload-artifact@v4.3.3
