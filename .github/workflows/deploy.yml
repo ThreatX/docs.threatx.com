@@ -13,6 +13,7 @@ jobs:
   deploy:
       # The type of runner that the job will run on
     runs-on: ubuntu-latest
+    environment: production
   
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -26,8 +27,8 @@ jobs:
       with:
         args: --acl public-read --follow-symlinks --delete
       env:
-        AWS_S3_BUCKET: docs-staging.threatx.com
+        AWS_S3_BUCKET: ${{ vars.S3_BUCKET }}
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        AWS_REGION: 'us-east-1'  
+        AWS_REGION: us-east-1
         SOURCE_DIR: 'public'   
