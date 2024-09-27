@@ -1,12 +1,12 @@
 
 runtime:
-  cache_dir: ./cache/antora
+  cache_dir: ./.cache/antora
   log:
-    failure_level: warn
+    failure_level: error
 
 site:
-  title: ThreatX Product Documentation
-  start_page: txprevent::index.adoc
+  title: ThreatX Documentation
+  start_page: txgeneral::landing.adoc
   robots: allow
   url: https://docs.threatx.com
 
@@ -33,13 +33,17 @@ asciidoc:
       table-frame: 'none@'
       table-grid: 'rows@'
   extensions: [ ]
-    
+
+antora:
+  extensions: 
+    - '@antora/lunr-extension'
+   
 output:
   clean: true
   dir: ./public
 
 ui:
   bundle:
-    url: https://github.com/ThreatX/threatx-user-docs-ui-default/releases/download/0.1.1/ui-bundle.zip
+    url: https://github.com/ThreatX/threatx-user-docs-ui-default/releases/download/0.1.2/ui-bundle.zip
     snapshot: true
 
