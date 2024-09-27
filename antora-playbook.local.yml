@@ -6,7 +6,7 @@ runtime:
 
 site:
   title: ThreatX Product Documentation
-  start_page: txprevent::index.adoc
+  start_page: txgeneral::landing.adoc
   robots: allow
   url: https://docs.threatx.com
 
@@ -32,8 +32,10 @@ asciidoc:
       page-pagination: ''
       table-frame: 'none@'
       table-grid: 'rows@'
-  extensions: [ ]
     
+antora:
+  extensions: 
+    - '@antora/lunr-extension'
 output:
   clean: true
   dir: ./public

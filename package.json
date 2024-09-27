@@ -10,23 +10,21 @@
         "@fontsource/montserrat": "^5.0.20",
         "asciidoctor-emoji": "^0.5.0"
     },
-"scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "yamllint antora-playbook.yml",
-    "build": "npx antora antora-playbook.yml",
-    "serve": "npx http-server ./public/"
-
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ThreatX/threatx-docs-public.git"
-  },
-  "keywords": [
-    "Antora",
-    "AsciiDoc",
-    "tooling"
-  ],
-  "author": "Nick Ferguson <nick.ferguson@threatx.com>",
-  "homepage": "https://gitub.com/ThreatX/threatx-docs-public"
-
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "lint": "yamllint antora-playbook.yml",
+        "build": "npx antora antora-playbook.yml",
+        "serve": "npx http-server ./public/"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/ThreatX/threatx-docs-public.git"
+    },
+    "keywords": [
+        "Antora",
+        "AsciiDoc",
+        "tooling"
+    ],
+    "author": "Nick Ferguson <nick.ferguson@threatx.com>",
+    "homepage": "https://gitub.com/ThreatX/threatx-docs-public"
 }
