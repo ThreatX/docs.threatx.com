@@ -6,7 +6,7 @@ runtime:
 
 site:
   title: ThreatX Documentation
-  start_page: txgeneral::landing.adoc
+  start_page: txgeneral::index.adoc
   robots: allow
   url: https://docs.threatx.com
 
@@ -25,18 +25,32 @@ content:
 asciidoc:
   attributes:
       experimental: true
-      copyright: '© Copyright 2024 ThreatX, Inc.'
+      :sectids:
+      :sectlinks:
       hide-uri-scheme: '@'
       idprefix: ''
       idseparator: '-'
       page-pagination: ''
       table-frame: 'none@'
       table-grid: 'rows@'
+      organization: ThreatX
+      copyright: '© Copyright 2024 ThreatX, Inc.'
+      txprevent-current-version: '1.0'
+      txprotect-current-version: '3.20'
   extensions: [ ]
 
 antora:
   extensions: 
     - '@antora/lunr-extension'
+    - id: set-global-asciidoc-attributes
+      enabled: true
+      require: ./lib/set-global-asciidoc-attributes-extension.js
+    - id: doc-to-pdf
+      enabled: false
+      require: ./lib/doc-to-pdf-extension.js
+    - id: export-content
+      enabled: false
+      require: ./lib/export-content-extension.js
    
 output:
   clean: true
@@ -44,6 +58,6 @@ output:
 
 ui:
   bundle:
-    url: https://github.com/ThreatX/threatx-user-docs-ui-default/releases/download/0.1.2/ui-bundle.zip
+    url: https://github.com/ThreatX/threatx-docs-ui/releases/latest/download/ui-bundle.zip
     snapshot: true
 

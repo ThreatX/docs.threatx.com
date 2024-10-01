@@ -8,12 +8,14 @@
         "@antora/lunr-extension": "^1.0.0-alpha.8",
         "@docsearch/js": "^3.6.1",
         "@fontsource/montserrat": "^5.0.20",
-        "asciidoctor-emoji": "^0.5.0"
+        "asciidoctor-emoji": "^0.5.0",
+        "node-html-parser": "^6.1.13"
     },
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "lint": "yamllint antora-playbook.yml",
-        "build": "npx antora antora-playbook.yml",
+        "build": "npx antora --fetch --stacktrace antora-playbook.yml",
+        "build-local": "npx antora --fetch --stacktrace local-antora-playbook.yml",
         "serve": "npx http-server ./public/"
     },
     "repository": {

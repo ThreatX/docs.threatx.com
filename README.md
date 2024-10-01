@@ -6,6 +6,8 @@ It is only for orchestrating the Antora site generation process and not for stor
 
 Antora is a static site generator that generates documentation sites from AsciiDoc files.
 
+The UI for this site is in another repository: [threatx-docs-ui](https://github.com/ThreatX/threatx-docs-ui).
+
 ## Links
 
 * [Introduction to Documentation-as-Code](docs/docs-as-guide-introl.md)
@@ -26,11 +28,14 @@ which it will then use to assmemble the site.
 
 ### Build
 
+The default behavior is the fetch the `ui-bundle.zip` from the latest release of [threatx-docs-ui](https://github.com/ThreatX/threatx-docs.ui).  
+
 ```bash
 npm i
-npx antora antora-playbook.yml
+npx antora --fetch --stacktrace antora-playbook.yml
 ```
-The generated site will be in `public/` if successful.
+
+The site contents will be found under `public/`.
 
 ### Release
 
@@ -38,5 +43,31 @@ A github action builds and uploads the site to the S3 bucket `s3://docs.threatx.
 
 The documentation site can be found at [docs.threatx.com](https://docs.threatx.com). 
 A CloudFront distribution fronts the static S3 site.  
+
+
+#### Author Mode
+
+If you have cloned this project, as well as the documentation sources and ui project into the same directory, the local playbook will build from the HEAD of each local git repo.
+
+```bash
+git clone --branch main git@github.com:ThreatX/threatx-docs-public 
+git clone --branch main git@github.com:ThreatX/threatx-docs-ui
+git clone --branch main git@github.com:ThreatX/threatx-docs-general
+git clone --branch 1.0 git@github.com:ThreatX/threatx-docs-txprevent
+git clone --branch 3.20 git@github.com:ThreatX/threatx-docs-txprotect
+
+# First build the UI
+cd threatx-docs-ui
+npm i
+./node_modules/.bin/gulp 
+
+# Now generate the site
+cd ../threatx-docs-public
+npm i
+npx antora --fetch --stacktrace local-antora-playbook.yml
+
+## View the result
+open public/index.html
+```
 
 
