@@ -39,12 +39,10 @@ jobs:
       run: npm install
     
     - name: Generate Site 
-      env:
-       CI: false
       run: |
         source /etc/profile.d/rvm.sh
         rvm use 3.3.5
-        ./node_modules/.bin/antora --fetch --stacktrace antora-playbook.yml
+        npx antora --fetch --stacktrace antora-playbook.yml
         ls public  
         
     - name: Upload Site Files Build Artifact
