@@ -15,4 +15,4 @@ asciidoc:
     outlinelevels: 3
     toclevels: 3
 build:
-  command: /usr/local/lib/ruby/gems/3.3.0/bin/bundle exec asciidoctor-pdf --trace -a allow-uri-read -a compress -a outline -a outlinelevels=3 -a icon-set=fas -a toc -a toclevels=3 -a title-page
+  command: bundle exec asciidoctor-pdf --trace -a allow-uri-read -a compress 
