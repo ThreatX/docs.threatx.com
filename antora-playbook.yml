@@ -23,10 +23,11 @@ content:
       start_path: docs
 
 asciidoc:
+  extensions:
+    - asciidoctor-emoji
   attributes:
       experimental: true
-      :sectids:
-      :sectlinks:
+      copyright: '© Copyright 2024 ThreatX, Inc.'
       hide-uri-scheme: '@'
       idprefix: ''
       idseparator: '-'
@@ -34,11 +35,9 @@ asciidoc:
       table-frame: 'none@'
       table-grid: 'rows@'
       organization: ThreatX
-      copyright: '© Copyright 2024 ThreatX, Inc.'
       txprevent-current-version: '1.0'
       txprotect-current-version: '3.20'
-  extensions: [ ]
-
+    
 antora:
   extensions: 
     - '@antora/pdf-extension'
@@ -46,7 +45,6 @@ antora:
     - id: set-global-asciidoc-attributes
       enabled: true
       require: ./lib/set-global-asciidoc-attributes-extension.js
-  
 
 output:
   clean: true
