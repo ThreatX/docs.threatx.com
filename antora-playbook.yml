@@ -41,17 +41,13 @@ asciidoc:
 
 antora:
   extensions: 
+    - '@antora/pdf-extension'
     - '@antora/lunr-extension'
     - id: set-global-asciidoc-attributes
       enabled: true
       require: ./lib/set-global-asciidoc-attributes-extension.js
-    - id: doc-to-pdf
-      enabled: false
-      require: ./lib/doc-to-pdf-extension.js
-    - id: export-content
-      enabled: false
-      require: ./lib/export-content-extension.js
-   
+  
+
 output:
   clean: true
   dir: ./public

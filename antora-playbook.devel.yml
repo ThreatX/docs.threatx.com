@@ -15,14 +15,19 @@ content:
     - url: ../threatx-docs-txprevent
       branches: HEAD
       start_path: docs
+      edit_url: '{web_url}/{refname}/{path}'
     - url: ../threatx-docs-general
       branches: HEAD
       start_path: docs
+      edit_url: '{web_url}/{refname}/{path}'
     - url: ../threatx-docs-txprotect
       branches: HEAD
       start_path: docs
+      edit_url: '{web_url}/{refname}/{path}'
 
 asciidoc:
+  extensions:
+    - asciidoctor-emoji
   attributes:
       experimental: true
       copyright: '© Copyright 2024 ThreatX, Inc.'
@@ -38,10 +43,12 @@ asciidoc:
     
 antora:
   extensions: 
+    - '@antora/pdf-extension'
     - '@antora/lunr-extension'
     - id: set-global-asciidoc-attributes
       enabled: true
       require: ./lib/set-global-asciidoc-attributes-extension.js
+  
 
 output:
   clean: true

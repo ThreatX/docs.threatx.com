@@ -6,6 +6,7 @@
     },
     "dependencies": {
         "@antora/lunr-extension": "^1.0.0-alpha.8",
+        "@antora/pdf-extension": "^1.0.0-alpha.9",
         "@docsearch/js": "^3.6.1",
         "@fontsource/montserrat": "^5.0.20",
         "asciidoctor-emoji": "^0.5.0",
@@ -15,12 +16,16 @@
         "test": "echo \"Error: no test specified\" && exit 1",
         "lint": "yamllint antora-playbook.yml",
         "build": "npx antora --fetch --stacktrace antora-playbook.yml",
-        "build-local": "npx antora --fetch --stacktrace local-antora-playbook.yml",
-        "serve": "npx http-server ./public/"
+        "build-local": "npx antora --fetch --stacktrace antora-playbook.devel.yml",
+        "serve": "npx http-server ./public/",
+        "bundle": "bundle config set path .bundle/gems && bundle",
+        "ruby-install": "rvm install 3.3.5 && rvm use 3.3.5",
+        "clean": "rm -rf ./build ./public",
+        "clear-cache": "rm -rf ./.bundle ./node_modules ./.cache"
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/ThreatX/threatx-docs-public.git"
+        "url": "git+https://github.com/ThreatX/docs.threatx.com.git"
     },
     "keywords": [
         "Antora",
@@ -28,5 +33,5 @@
         "tooling"
     ],
     "author": "Nick Ferguson <nick.ferguson@threatx.com>",
-    "homepage": "https://gitub.com/ThreatX/threatx-docs-public"
+    "homepage": "https://gitub.com/ThreatX/docs.threatx.com"
 }

@@ -1,0 +1,15 @@
+root_level: 1
+component_versions: 
+  - txprevent
+  - txprotect
+  - txgeneral
+asciidoc:
+  attributes:
+    source-highlighter: rouge
+    pdf-theme: ./resources/themes/threatx-base-theme.yml
+    pdf-fontsdir: ./resources/fonts
+    :allow-uri-read: true
+    :toc:
+    :icons: font
+build:
+  command: bundle exec asciidoctor-pdf --trace 
