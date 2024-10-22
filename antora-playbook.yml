@@ -13,7 +13,7 @@ site:
 content:
   sources:
     - url: https://github.com/ThreatX/threatx-docs-txprevent.git
-      branches: ['1.0']
+      branches: ['1.0','1.1']
       start_path: docs
     - url: https://github.com/ThreatX/threatx-docs-general.git
       branches: [main]
@@ -35,7 +35,7 @@ asciidoc:
       table-frame: 'none@'
       table-grid: 'rows@'
       organization: ThreatX
-      txprevent-current-version: '1.0'
+      txprevent-current-version: '1.1'
       txprotect-current-version: '3.20'
     
 antora:
