@@ -33,6 +33,7 @@ The __staging__ environment publishes to [docs-staging.threatx.com](http://docs-
 ### Required Reviewers
 1. Any member of [ThreatX/Documentation](https://github.com/orgs/ThreatX/teams/documentation) can approve deployments to the production environment
 
+![Release Process](./README/txdocs.png)
 
 ## Components
 
