@@ -56,7 +56,7 @@ header:
   line-height: 1
   recto:
     center:
-      content: '(C) ThreatX, Inc. -- {revnumber}, {docdate}'
+      content: '(C) ThreatX, Inc. -- v{revnumber}, {docdate}'
   verso:
     center:
       content: $header-recto-center-content

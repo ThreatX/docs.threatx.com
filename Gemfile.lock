@@ -61,6 +61,7 @@ PLATFORMS
   x86_64-darwin-23
 
 DEPENDENCIES
+  asciidoctor
   asciidoctor-pdf
   logger
   ostruct

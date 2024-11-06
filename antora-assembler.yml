@@ -8,11 +8,5 @@ asciidoc:
     source-highlighter: rouge
     pdf-theme: ./resources/themes/threatx-base-theme.yml
     pdf-fontsdir: ./resources/fonts
-    allow-uri-read: true
-    toc: 
-    icons: font
-    outline: true
-    outlinelevels: 3
-    toclevels: 3
 build:
-  command: bundle exec asciidoctor-pdf --trace -a allow-uri-read -a compress 
+  command: bundle exec asciidoctor-pdf --trace -a allow-uri-read -a toc -a outline -a title-page -a doctype=book
