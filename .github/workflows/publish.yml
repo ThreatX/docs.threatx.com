@@ -8,45 +8,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-    steps:
-    - uses: actions/checkout@v4
-    
-    - name: Use Node.js 22.8.0
-      uses: actions/setup-node@v4
-      with:
-        node-version: 22.8.0
-  
-    - name: Install Ruby Dependencies
-      run: |
-        sudo apt-get update && sudo apt-get install -y software-properties-common
-        sudo apt-add-repository -y ppa:rael-gc/rvm
-        sudo apt-get update && sudo apt-get install -y rvm
-        source /etc/profile.d/rvm.sh
-        rvm install 3.3.5
-        rvm use 3.3.5
-        bundle config set path '.bundle/gems'
-        bundle 
-
-    - name: Install Node Dependencies 
-      run: npm install
-    
-    - name: Generate Site 
-      run: |
-        source /etc/profile.d/rvm.sh
-        rvm use 3.3.5
-        npx antora --fetch --stacktrace antora-playbook.yml
-        echo "-------- Build output: ------------"
-        ls -alh public
-        
-    - name: Upload Site Files Build Artifact
-      id: artifact-upload-step
-      uses: actions/upload-artifact@v4.3.3
-      with:
-        name: public
-        path: public/*
-        if-no-files-found: error
+    uses: ./.github/workflows/build.yml
     
   stage:
     # The type of runner that the job will run on
@@ -58,7 +20,7 @@ jobs:
     - name: Download build artifacts
       uses: dawidd6/action-download-artifact@v6
       with:
-        name: public
+        workflow: build.yml
     
     - name: Upload site
       uses: bwcxyk/s3-sync-action@1.0.0
@@ -82,7 +44,7 @@ jobs:
     - name: Download artifacts
       uses: dawidd6/action-download-artifact@v6
       with:
-        name: public
+        workflow: build.yml
       
     
     - name: Upload
