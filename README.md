@@ -1,4 +1,5 @@
-# ThreatX User Documentation Site and Playbook Project
+# ThreatX Documentation Site 
+[![Build](https://github.com/ThreatX/docs.threatx.com/actions/workflows/build.yml/badge.svg)](https://github.com/ThreatX/docs.threatx.com/actions/workflows/build.yml) [![Publish](https://github.com/ThreatX/docs.threatx.com/actions/workflows/publish.yml/badge.svg)](https://github.com/ThreatX/docs.threatx.com/actions/workflows/publish.yml)
 
 This is a playbook project for [docs.threatx.com](https://docs.threatx.com).
 
@@ -25,8 +26,12 @@ The UI for this site is in another repository: [threatx-docs-ui](https://github.
 The __production__ environment publishes to [docs.threatx.com](https://docs.threatx.com).  
 The __staging__ environment publishes to [docs-staging.threatx.com](http://docs-staging.threatx.com).
 
-**Generate the site** and **deploy to the staging environment** by manually dispatching the **[Publish](https://github.com/ThreatX/docs.threatx.com/actions/workflows/stage.yml)** workflow.  
-There is a __Required Reviewer__ approval gate protecting the production environment.
+1. [Build the site](https://github.com/ThreatX/docs.threatx.com/actions/workflows/build.yml) via manual dispatch.
+2. [Publish to the Staging Environment](https://github.com/ThreatX/docs.threatx.com/actions/workflows/publish.yml)
+3. Approval by a Required Reviewer is needed to publish to the Production Environment
+
+### Required Reviewers
+1. Any member of [ThreatX/Documentation](https://github.com/orgs/ThreatX/teams/documentation) can approve deployments to the production environment
 
 
 ## Components
