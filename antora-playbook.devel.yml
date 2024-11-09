@@ -15,17 +15,15 @@ content:
     - url: ../threatx-docs-txprevent
       branches: HEAD
       start_path: docs
-      edit_url: '{web_url}/{refname}/{path}'
     - url: ../threatx-docs-general
       branches: HEAD
       start_path: docs
-      edit_url: '{web_url}/{refname}/{path}'
     - url: ../threatx-docs-txprotect
       branches: HEAD
       start_path: docs
-      edit_url: '{web_url}/{refname}/{path}'
 
 asciidoc:
+  sourcemap: true
   extensions:
     - asciidoctor-emoji
   attributes:
@@ -48,6 +46,15 @@ antora:
     - id: set-global-asciidoc-attributes
       enabled: true
       require: ./lib/set-global-asciidoc-attributes-extension.js
+    - id: print-compiled-asciidoc-attributes
+      enabled: true
+      require: ./lib/print-compiled-asciidoc-attributes-extension.js
+    - id: print-defined-asciidoc-attributes
+      enabled: true
+      require: ./lib/print-defined-asciidoc-attributes-extension.js
+    - id: all-pages-report
+      enabled: true
+      require: ./lib/all-pages-report-extension.js
   
 
 output:
