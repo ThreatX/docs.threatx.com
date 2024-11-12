@@ -1,5 +1,7 @@
 # ThreatX Documentation Site 
-[![Build](https://github.com/ThreatX/docs.threatx.com/actions/workflows/build.yml/badge.svg)](https://github.com/ThreatX/docs.threatx.com/actions/workflows/build.yml) [![Publish](https://github.com/ThreatX/docs.threatx.com/actions/workflows/publish.yml/badge.svg)](https://github.com/ThreatX/docs.threatx.com/actions/workflows/publish.yml)
+[![Build](https://github.com/ThreatX/docs.threatx.com/actions/workflows/build.yml/badge.svg)](https://github.com/ThreatX/docs.threatx.com/actions/workflows/build.yml)
+[![Deploy](https://github.com/ThreatX/docs.threatx.com/actions/workflows/publish.yml/badge.svg)](https://github.com/ThreatX/docs.threatx.com/actions/workflows/publish.yml)
+[![Validate](https://github.com/ThreatX/docs.threatx.com/actions/workflows/validate.yml/badge.svg)](https://github.com/ThreatX/docs.threatx.com/actions/workflows/validate.yml)
 
 This is a playbook project for [docs.threatx.com](https://docs.threatx.com).
 
@@ -23,15 +25,13 @@ The UI for this site is in another repository: [threatx-docs-ui](https://github.
 
 ## Release process
 
-The __production__ environment publishes to [docs.threatx.com](https://docs.threatx.com).  
-The __staging__ environment publishes to [docs-staging.threatx.com](http://docs-staging.threatx.com).
+__Production site URL:__ [https://docs.threatx.com](https://docs.threatx.com)
+__Staging site URL:__  [http://docs-staging.threatx.com](http://docs-staging.threatx.com) (no SSL)
 
-1. [Build the site](https://github.com/ThreatX/docs.threatx.com/actions/workflows/build.yml) via manual dispatch.
-2. [Publish to the Staging Environment](https://github.com/ThreatX/docs.threatx.com/actions/workflows/publish.yml)
-3. Approval by a Required Reviewer is needed to publish to the Production Environment
+- A successful run of [Build](https://github.com/ThreatX/docs.threatx.com/actions/workflows/build.yml) triggers the [Publish](https://github.com/ThreatX/docs.threatx.com/actions/workflows/publish.yml). It stops after the *stage* job to wait for a required reviewers approval.
+-  If approved, the *release* job proceeds to deploy the site to the production environment. Any member of [ThreatX/Documentation](https://github.com/orgs/ThreatX/teams/documentation) can approve deployments
+- If *release* job is successful, the [Validate](https://github.com/ThreatX/docs.threatx.com/actions/workflows/validate.yml) workflow is triggered. The *check-links* job validates all of the links and anchors on the production site.
 
-### Required Reviewers
-1. Any member of [ThreatX/Documentation](https://github.com/orgs/ThreatX/teams/documentation) can approve deployments to the production environment
 
 ![Release Process](./README/txdocs.png)
 
