@@ -28,16 +28,24 @@ asciidoc:
     - asciidoctor-emoji
   attributes:
       experimental: true
-      copyright: '© Copyright 2024 ThreatX, Inc.'
       hide-uri-scheme: '@'
       idprefix: ''
       idseparator: '-'
       page-pagination: ''
       table-frame: 'none@'
       table-grid: 'rows@'
+      # Custom attributes
+      copyright: '© Copyright 2024 ThreatX, Inc.'
       organization: ThreatX
       txprevent-current-version: '1.1'
       txprotect-current-version: '3.20'
+      txdashboard-current-version: '4.74'
+      tip-caption: 💡 TIP
+      caution-caption: 🔥 CAUTION
+      note-caption: ℹ NOTE
+      warning-caption: ⚠️ WARNING
+      error-caption: ❌ ERROR
+      important-caption: ❕ IMPORTANT   
     
 antora:
   extensions: 
