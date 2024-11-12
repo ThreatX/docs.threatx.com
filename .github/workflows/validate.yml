@@ -9,7 +9,8 @@ on:
       - Publish
     types:
       - completed
-
+    branches: 
+      - main
 
 jobs:
    check-links:
@@ -18,7 +19,6 @@ jobs:
      if: ${{ github.event.workflow_run.conclusion == 'success' }}
      steps:
        - run: echo "Publish workflow was a success"
-       - uses: actions/checkout@v4
        - name: Check Links
          uses: filiph/linkcheck@2.0.23
          with:
