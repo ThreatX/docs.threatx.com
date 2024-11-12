@@ -16,7 +16,7 @@ content:
       branches: ['1.0','1.1']
       start_path: docs
     - url: https://github.com/ThreatX/threatx-docs-general.git
-      branches: [main]
+      branches: ['4.74']
       start_path: docs
     - url: https://github.com/ThreatX/threatx-docs-txprotect.git
       branches: ['3.20']

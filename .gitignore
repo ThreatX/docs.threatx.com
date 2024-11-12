@@ -139,3 +139,5 @@ dist
 .bundle
 build/
 local-antora-assembler.yml
+.venv/
+/venv
