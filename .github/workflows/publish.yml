@@ -5,10 +5,14 @@ name: Publish
 on:
   workflow_dispatch:
   workflow_call:
+  workflow_run:
+    workflows:
+       - Build
+    types:
+       - completed
+  
 
 jobs:
-
-    
   stage:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
@@ -44,7 +48,6 @@ jobs:
       with:
         workflow: build.yml
       
-    
     - name: Upload
       uses: bwcxyk/s3-sync-action@1.0.0
       with:
