@@ -11,8 +11,13 @@ on:
     types:
        - completed
   
-
+env:
+  production_bucket: docs.threatx.com
+  staging_bucket: docs-staging.threatx.com
+  region: us-east-1
+  
 jobs:
+      
   stage:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
@@ -29,10 +34,10 @@ jobs:
       with:
         args: --acl public-read --follow-symlinks --delete
       env:
-        AWS_S3_BUCKET: docs-staging.threatx.com
+        AWS_S3_BUCKET: ${{ env.staging_bucket }}
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        AWS_REGION: us-east-1
+        AWS_REGION: ${{ env.region }}
         SOURCE_DIR: 'public'   
         
   release:
@@ -53,8 +58,8 @@ jobs:
       with:
         args: --acl public-read --follow-symlinks --delete
       env:
-        AWS_S3_BUCKET: docs.threatx.com
+        AWS_S3_BUCKET: ${{ env.production_bucket }}
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        AWS_REGION: us-east-1
+        AWS_REGION: ${{ env.region }}
         SOURCE_DIR: 'public'   
