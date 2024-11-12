@@ -4,21 +4,25 @@ name: Validate
 
 on:
   workflow_dispatch:
-  workflow_call:
+  workflow_run:
+    workflows:
+      - Publish
+    types:
+      - completed
 
 
 jobs:
-  quality:
-    # The type of runner that the job will run on
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Check Links
-        uses: filiph/linkcheck@2.0.23
-        with:
-          arguments: https://docs.threatx.com
+   check-links:
+     environment: production 
+     runs-on: ubuntu-latest
+     if: ${{ github.event.workflow_run.conclusion == 'success' }}
+     steps:
+       - run: echo "Publish workflow was a success"
+       - uses: actions/checkout@v4
+       - name: Check Links
+         uses: filiph/linkcheck@2.0.23
+         with:
+           arguments: https://docs.threatx.com
 
 
  
