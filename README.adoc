@@ -1,0 +1,114 @@
+= ThreatX Documentation Site
+:sectlinks:
+:sectids:
+:sectanchors:
+:icons: font
+:toc:
+:imagesdir: README
+:copyright: © 2024 ThreatX, Inc.
+:organization: ThreatX
+
+== Introduction
+
+image:https://github.com/ThreatX/docs.threatx.com/actions/workflows/build.yml/badge.svg[Build,link=https://github.com/ThreatX/docs.threatx.com/actions/workflows/build.yml]
+image:https://github.com/ThreatX/docs.threatx.com/actions/workflows/publish.yml/badge.svg[Deploy,link=https://github.com/ThreatX/docs.threatx.com/actions/workflows/publish.yml]
+image:https://github.com/ThreatX/docs.threatx.com/actions/workflows/validate.yml/badge.svg[Validate,link=https://github.com/ThreatX/docs.threatx.com/actions/workflows/validate.yml]
+
+This is a playbook project for https://docs.threatx.com[docs.threatx.com].
+
+It is only for orchestrating the https://antora.org[Antora] site generation process and not for storing the actual content.
+
+Antora is a static site generator that generates documentation sites from AsciiDoc files and modular sources.
+
+The UI for this site is in another repository: https://github.com/ThreatX/threatx-docs-ui[threatx-docs-ui].
+
+
+[#release-process]
+== Cutting a release
+
+[horizontal]
+Production site:: `https://docs.threatx.com`
+Staging site::  `http://docs-staging.threatx.com (no SSL)`
+
+. The https://github.com/ThreatX/docs.threatx.com/actions/workflows/build.yml[Build workflow] is trigger by _manual dispatch_ or changes to `antora-playbook.yml`
+. If *Build* is successful, the https://github.com/ThreatX/docs.threatx.com/actions/workflows/publish.yml[Publish workflow] is triggered.
+. The first job of *Publish*, _stage_, deploys the artifact from *Build* to the the link:http://docs-staging.threatx.com[staging site].
+. *Publish* pauses to *wait for approval* from a https://github.com/orgs/ThreatX/teams/documentation[required reviewer].
+. If approved, the _release_ job deploys the same artifact to the link:https://docs.threatx.com[production site]
+. If the _release_ job is successful, the https://github.com/ThreatX/docs.threatx.com/actions/workflows/validate.yml[Validate workflow] is triggered. The _check-links_ job validates all of the links and anchors on the production site.
+
+image::txdocs.png[Release Process]
+
+[#components]
+== Components
+
+* *Site* (Antora playbook to generate the site)
+** https://github.com/ThreatX/docs.threatx.com[docs.threatx.com]
+* *Documentation Sources* (AsciiDoc)
+** https://github.com/ThreatX/threatx-docs-txprevent[threatx-docs-txprevent]
+** https://github.com/ThreatX/threatx-docs-txprotect[threatx-docs-txprotect]
+** https://github.com/ThreatX/threatx-docs-general[threatx-docs-general]
+* *User Interface* (Antora UI) _See link:antora
+** https://github.com/ThreatX/threatx-docs-ui[threatx-docs-ui]
+
+[#development]
+== Development
+
+First install the Node and ruby dependencies.
+
+    npm i
+    npm run bundle
+
+
+[#antora-playbook]
+=== Antora Playbook
+
+An `antora-playbook.yml` can be found in the project root and is responsible for generating a documentation site.
+
+It contains the instructions a user wants to relay to the Antora site generator. These instructions include the content Antora should collect and the UI it should apply to the generated site.
+
+The Antora build process will fetch a UI bundle (zip file) and multiple documentation sources (git repos).
+
+    npm run build
+
+==== Author Mode
+
+For local development, use the `antora-playbook-author.yml`, or copy it as the base for your own if you need to modify it.
+
+Author mode uses the `HEAD` of _local git repos_.
+
+    npm run build-author
+
+To preview the results
+
+    npm run serve
+
+==== Building the UI Locally
+
+Clone the ui project
+
+    git clone https://github.com/ThreatX/threatx-docs-ui && cd threatx-docs-ui
+
+Build the bundle
+
+    npm i
+    npx gulp
+
+It will output a `--ui-bundle-url`  pointing to the `ui-bundle.zip` you just compiled. Use this in your `antora-playbook-author.yml` or as an argument to `npx antora --ui-bundle-url ...`
+
+[#links]
+== Useful Links
+
+* *Site Generation Framework*
+** https://docs.antora.org/antora/latest/[Antora] - _Static site generator for AsciiDoc_
+** https://docs.antora.org/antora-ui-default/[Antora User Interface] - _User interface (CSS, layouts, etc)_
+* *Reference for doc writers*
+** https://docs.asciidoctor.org/asciidoc/latest/syntax-quick-reference/[AsciiDoc Syntax Reference]
+** https://docs.asciidoctor.org/asciidoc/latest/[AsciiDoc Language]
+* *Converters*
+** https://docs.asciidoctor.org/asciidoctor/latest/[AsciiDoctor] - _Generate HTML5, Docbook, or manpages from AsciiDoc_
+** https://docs.asciidoctor.org/pdf-converter/latest/[AsciiDoctor PDF] - _Generate PDFs from AsciiDoc_
+* *Style*
+** https://redhat-documentation.github.io/supplementary-style-guide/[RedHat Style Guide] - _The style guide on which our own is based_
+* *Approach*
+** https://www.writethedocs.org/guide/docs-as-code/[Docs-as-code] - _General info on modern documentation processes_

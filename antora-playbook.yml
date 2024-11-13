@@ -35,6 +35,9 @@ asciidoc:
       table-frame: 'none@'
       table-grid: 'rows@'
       organization: ThreatX
+      sectlinks: true
+      sectids: true
+      sectanchors: true
       # Custom Attributes
       copyright: '© Copyright 2024 ThreatX, Inc.'
       txprevent-current-version: '1.1'

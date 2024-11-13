@@ -141,3 +141,5 @@ build/
 local-antora-assembler.yml
 .venv/
 /venv
+/.idea
+/docs.threatx.com.iml
