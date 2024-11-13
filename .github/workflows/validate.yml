@@ -4,38 +4,32 @@ name: Validate
 
 on:
   workflow_dispatch:
+    inputs:
+      target_url:
+        type: choice
+        description: Site to check
+        options: 
+        - https://docs.threatx.com
+        - http://docs-staging.threatx.com
+        default: 'https://docs.threatx.com'
   workflow_run:
     workflows:
       - Publish
     types:
       - completed
-      - waiting
     branches: 
       - main
 
 jobs:
-
-   check-staging:
-     environment: staging
+       
+   check-links: 
      runs-on: ubuntu-latest
-     if: ${{ github.event.workflow_run.conclusion == 'action_required' }}
-     steps:
-       - run: echo "Staging has completed successfully"
-       - name: Check Links
-         uses: filiph/linkcheck@2.0.23
-         with:
-           arguments: http://docs-staging.threatx.com
-           
-   check-prod: 
-     environment: production
-     runs-on: ubuntu-latest
-     if: ${{ github.event.workflow_run.conclusion == 'success' }}
      steps:
        - run: echo "Publish workflow was a success"
        - name: Check Links
          uses: filiph/linkcheck@2.0.23
          with:
-           arguments: https://docs.threatx.com
+           arguments: ${{ inputs.target_url }}
 
 
  
