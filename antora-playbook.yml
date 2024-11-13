@@ -13,7 +13,7 @@ site:
 content:
   sources:
     - url: https://github.com/ThreatX/threatx-docs-txprevent.git
-      branches: ['1.0','1.1','1.2']
+      branches: ['1.1']
       start_path: docs
     - url: https://github.com/ThreatX/threatx-docs-general.git
       branches: ['4.74']
