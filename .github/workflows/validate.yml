@@ -21,15 +21,14 @@ on:
       - main
 
 jobs:
-       
+   
    check-links: 
      runs-on: ubuntu-latest
      steps:
-       - run: echo "Publish workflow was a success"
        - name: Check Links
          uses: filiph/linkcheck@2.0.23
          with:
-           arguments: ${{ inputs.target_url }}
+           arguments:  ${{ github.event.inputs.target_url || 'https://docs.threatx.com' }}
 
 
  
