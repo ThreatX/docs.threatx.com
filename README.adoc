@@ -1,18 +1,32 @@
 = ThreatX Documentation Site
+:doctype: article
+:keywords: documentation, ThreatX, AsciiDoc, Antora
+:description: README for ThreatX Documentation's Antora Site Playbook project
+:license-type: THREATX PROPRIETARY DOCUMENTATION LICENSE
+:author: Nick Ferguson
+:email: nick.ferguson@threatx.com
+:revnumber: v0.1
+:revdate: 2024-11-22
+:source-highlighter: rouge
+:rouge-style: github
+:!showtitle:
+:icons: font
+:toc:
+:toclevels: 3
+:imagesdir: README
+:hardbreaks-option:
 :sectlinks:
 :sectids:
 :sectanchors:
-:icons: font
-:toc:
-:imagesdir: README
-:copyright: © 2024 ThreatX, Inc.
-:organization: ThreatX
+// Custom attributes
+:url-documentation: https://docs.threatx.com
+:url-repo: https://github.com/ThreatX/docs.threatx.com
+:url-workflow-build: {url-repo}/actions/workflows/build.yml
+:url-workflow-publish: {url-repo}/actions/workflows/publish.yml
+:url-workflow-validate: {url-repo}/actions/workflows/validate.yml
 
 == Introduction
 
-image:https://github.com/ThreatX/docs.threatx.com/actions/workflows/build.yml/badge.svg[Build,link=https://github.com/ThreatX/docs.threatx.com/actions/workflows/build.yml]
-image:https://github.com/ThreatX/docs.threatx.com/actions/workflows/publish.yml/badge.svg[Deploy,link=https://github.com/ThreatX/docs.threatx.com/actions/workflows/publish.yml]
-image:https://github.com/ThreatX/docs.threatx.com/actions/workflows/validate.yml/badge.svg[Validate,link=https://github.com/ThreatX/docs.threatx.com/actions/workflows/validate.yml]
 
 This is a playbook project for https://docs.threatx.com[docs.threatx.com].
 
@@ -23,41 +37,96 @@ Antora is a static site generator that generates documentation sites from AsciiD
 The UI for this site is in another repository: https://github.com/ThreatX/threatx-docs-ui[threatx-docs-ui].
 
 
-[#release-process]
-== Cutting a release
+.📁Structure of a site playbook project
+****
+[,console]
+----
+├── .github
+│   └── workflows
+│       └── quality.yml            # Use Vale to check for style problems
+├── .gitignore
+├── .vscode
+│  └── tasks.json                  # Build the site, Check for problems, etc.
+├── Gemfile
+├── Gemfile.lock
+├── README                         # Using the documentation platform
+│   ├── AUTHORS.adoc
+├── README.adoc
+├── antora-assembler.yml          # Create PDFs for all pages during site generation
+├── antora-playbook-author.yml    # Playbook for local development and doc writers
+├── antora-playbook.yml           # Playbook to generate the site
+├── lib                           # Antora extensions (javascript)
+├── package-lock.json
+├── package.json
+└── resources                     # Resources for PDF conversion
+    ├── fonts
+    └── themes
+        └── threatx-base-theme.yml
+----
+****
 
+[#projects]
+.📂 Framework Projects
+****
 [horizontal]
-Production site:: `https://docs.threatx.com`
-Staging site::  `http://docs-staging.threatx.com (no SSL)`
+Site Playbook::
+* https://github.com/ThreatX/docs.threatx.com[docs.threatx.com]
+User Interface::
+* https://github.com/ThreatX/threatx-docs-ui[threatx-docs-ui]
+Doc Sources::
+* link:https://github.com/ThreatX/threatx-docs-txprevent[Prevent Product Docs]
+* link:https://github.com/ThreatX/threatx-docs-txprotect[Protect Product Docs]
+* link:https://github.com/ThreatX/threatx-docs-general[General Platform]
+Templates::
+* link:https://github.com/ThreatX/threatx-docs-component-template[Doc Component]
+****
 
-. The https://github.com/ThreatX/docs.threatx.com/actions/workflows/build.yml[Build workflow] is trigger by _manual dispatch_ or changes to `antora-playbook.yml`
-. If *Build* is successful, the https://github.com/ThreatX/docs.threatx.com/actions/workflows/publish.yml[Publish workflow] is triggered.
-. The first job of *Publish*, _stage_, deploys the artifact from *Build* to the the link:http://docs-staging.threatx.com[staging site].
-. *Publish* pauses to *wait for approval* from a https://github.com/orgs/ThreatX/teams/documentation[required reviewer].
-. If approved, the _release_ job deploys the same artifact to the link:https://docs.threatx.com[production site]
-. If the _release_ job is successful, the https://github.com/ThreatX/docs.threatx.com/actions/workflows/validate.yml[Validate workflow] is triggered. The _check-links_ job validates all of the links and anchors on the production site.
 
+== Release process
+
+[.right]
 image::txdocs.png[Release Process]
 
-[#components]
-== Components
+.🚀 Environments
+[horizontal]
+🟢 Production:: `https://docs.threatx.com`
+🔵 Staging::  `http://docs-staging.threatx.com`
 
-* *Site* (Antora playbook to generate the site)
-** https://github.com/ThreatX/docs.threatx.com[docs.threatx.com]
-* *Documentation Sources* (AsciiDoc)
-** https://github.com/ThreatX/threatx-docs-txprevent[threatx-docs-txprevent]
-** https://github.com/ThreatX/threatx-docs-txprotect[threatx-docs-txprotect]
-** https://github.com/ThreatX/threatx-docs-general[threatx-docs-general]
-* *User Interface* (Antora UI) _See link:antora
-** https://github.com/ThreatX/threatx-docs-ui[threatx-docs-ui]
+When you are ready to update link:https://docs.threatx.com[docs.threatx.com] ...
 
-[#development]
-== Development
+. ▶️Manually trigger the link:{url-workflow-build}[Build workflow] to generate the site content
+. ✅ A successful run of _Build_ automatically triggers the link:{url-workflow-publish}[Publish workflow]
+. 🚀 The site is deployed the *staging* environment.
+. 🛑 The workflow stops to *wait for approval* from a member of ThreatX's link:https://github.com/orgs/ThreatX/teams/documentation[documentation group]
+. 🚀 Once approved. the site is deployed to the *production* environment.
+. ✅ A succesful run of _Publish_ triggers the link:{url-workflow-validate}[Validate workflow]
+.. All 🔗links and #️⃣ anchors are checked
 
-First install the Node and ruby dependencies.
 
-    npm i
-    npm run bundle
+
+== Build process
+
+=== Install
+
+.Install Node dependencies
+[,console]
+----
+$ npm install
+----
+
+.Install ruby dependencies
+[,console]
+----
+$ bundle config set path .bundle/gems
+$ bundle
+----
+
+[TIP]
+.Callling project executables
+====
+* Use `bundle exec` to call ruby executables (e.g., `bundle exec asciidoctor`)
+* Use `npx` to call node executables. (e.g., `npx antora` )
+====
 
 
 [#antora-playbook]
@@ -69,32 +138,69 @@ It contains the instructions a user wants to relay to the Antora site generator.
 
 The Antora build process will fetch a UI bundle (zip file) and multiple documentation sources (git repos).
 
-    npm run build
+.Generate the site
+[,console]
+----
+$ npx antora --stacktrace --fetch antora-playbook.yml
+----
+
 
 ==== Author Mode
 
-For local development, use the `antora-playbook-author.yml`, or copy it as the base for your own if you need to modify it.
-
 Author mode uses the `HEAD` of _local git repos_.
 
-    npm run build-author
 
-To preview the results
+.Generate the site
+[,console]
+----
+$ npx antora --stacktrace --fetch antora-playbook-author.yml
+----
 
-    npm run serve
+TIP: If you need more flexibility, copy the author playbook as the base for your own.
 
-==== Building the UI Locally
 
-Clone the ui project
+===== Previewing Author Mode Site
 
-    git clone https://github.com/ThreatX/threatx-docs-ui && cd threatx-docs-ui
+.Serve the latest build output locally
+[,console]
+----
+$ npx http-server ./public/
+----
 
-Build the bundle
+TIP: You can also simply open `public/index.html` in your browser.
 
-    npm i
-    npx gulp
 
-It will output a `--ui-bundle-url`  pointing to the `ui-bundle.zip` you just compiled. Use this in your `antora-playbook-author.yml` or as an argument to `npx antora --ui-bundle-url ...`
+==== Building the User Interface bundle
+
+The Author Mode Playbook will download the latest release from link:https://github.com/ThreatX/threatx-docs-ui[]
+since3 its much less common for doc writers to be making changes there.
+
+However, you can still use the same author playbook with a local build of the UI.
+
+.Serve the latest build output locally
+[,console]
+----
+$ git clone https://github.com/ThreatX/threatx-docs-ui && cd threatx-docs-ui
+$ npm i
+$ gulp
+
+# You also have the option of previewing the UI bundle
+$ gulp preview
+----
+
+Now when you call the author mode playbook, you can override the URL to the UI bundle with this path:
+
+NOTE: These steps expect the `threatx-docs-ui` and `docs.threatx.com` repos to next to one another in the same directory. Otherwise, modify the command as needed.
+
+.Build the author playbook with a local UI bundle
+[,console]
+----
+$ npx antora --stacktrace --fetch --ui-bundle ../threatx-docs-ui/build/ui-bundle.zip
+----
+
+
+=== Tooling
+
 
 [#links]
 == Useful Links
@@ -112,3 +218,6 @@ It will output a `--ui-bundle-url`  pointing to the `ui-bundle.zip` you just com
 ** https://redhat-documentation.github.io/supplementary-style-guide/[RedHat Style Guide] - _The style guide on which our own is based_
 * *Approach*
 ** https://www.writethedocs.org/guide/docs-as-code/[Docs-as-code] - _General info on modern documentation processes_
+* *Tooling*
+** link:https://intellij-asciidoc-plugin.ahus1.de/docs/users-guide/index.html[IntelliJ AsciiDoc Plugin] - _The most powerful editor for writing and previewing AsciiDoc and Antora sites_
+** link:https://marketplace.visualstudio.com/items?itemName=asciidoctor.asciidoctor-vscode[AsciiDoc VS Code Plugin]

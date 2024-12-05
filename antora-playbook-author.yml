@@ -10,11 +10,17 @@ site:
   robots: allow
   url: http://localhost:8080
 
+urls:
+  redirect_facility: static
+  latest_version_segment_strategy: redirect:to
+  latest_version_segment: current
+
 content:
   sources:
     - url: ../threatx-docs-txprevent
       branches: HEAD
       start_path: docs
+
     - url: ../threatx-docs-general
       branches: HEAD
       start_path: docs
@@ -34,19 +40,23 @@ asciidoc:
       page-pagination: ''
       table-frame: 'none@'
       table-grid: 'rows@'
-      # Custom attributes
+      table-stripes: even
       copyright: '© Copyright 2024 ThreatX, Inc.'
-      organization: ThreatX
-      txprevent-current-version: '1.1'
-      txprotect-current-version: '3.20'
-      txdashboard-current-version: '4.74'
+      orgname: ThreatX
       tip-caption: 💡 TIP
-      caution-caption: 🔥 CAUTION
       note-caption: ℹ NOTE
       warning-caption: ⚠️ WARNING
       error-caption: ❌ ERROR
-      important-caption: ❕ IMPORTANT   
-    
+      important-caption: ❕ IMPORTANT
+      # Custom attributes
+      organization: ThreatX
+      txprevent-current-version: '1.1'
+      txprotect-current-version: '3.20'
+      page-txprevent-current-version: '1.1'
+      page-txprotect-current-version: '3.20'
+      url-txapi: 'https://api.threatx.com/tx_api/v2'
+
+
 antora:
   extensions: 
     - '@antora/pdf-extension'
