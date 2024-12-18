@@ -16,13 +16,9 @@
         "node-html-parser": "^6.1.13"
     },
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
-        "check": "npx yamllint -c .yamllint.yml antora-playbook.yml",
         "build": "npx antora --fetch --stacktrace antora-playbook.yml",
-        "build-author": "npx antora --fetch --stacktrace antora-playbook-author.yml",
+        "author": "npx antora --fetch --stacktrace antora-playbook-author.yml",
         "serve": "npx http-server ./public/",
-        "bundle": "bundle config set path .bundle/gems && bundle",
-        "ruby-install": "rvm install 3.3.5 && rvm use 3.3.5",
         "clean": "rm -rf ./build ./public ./.bundle ./node_modules ./.cache"
     },
     "repository": {

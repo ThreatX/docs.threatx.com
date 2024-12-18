@@ -1,4 +1,4 @@
-= ThreatX Documentation Site
+= ThreatX Product Documentation Site
 :doctype: article
 :keywords: documentation, ThreatX, AsciiDoc, Antora
 :description: README for ThreatX Documentation's Antora Site Playbook project
@@ -36,9 +36,15 @@ Antora is a static site generator that generates documentation sites from AsciiD
 
 The UI for this site is in another repository: https://github.com/ThreatX/threatx-docs-ui[threatx-docs-ui].
 
+These are the current documentation source repositories included in the site:
+* link:https://github.com/ThreatX/threatx-docs-txprevent[Prevent Product Docs]
+* link:https://github.com/ThreatX/threatx-docs-txprotect[Protect Product Docs]
+* link:https://github.com/ThreatX/threatx-docs-general[General Platform]
+* link:https://github.com/ThreatX/threatx-docs-component-template[Template for source content repositories]
 
-.📁Structure of a site playbook project
-****
+
+=== Site playbook project structure
+
 [,console]
 ----
 ├── .github
@@ -46,16 +52,16 @@ The UI for this site is in another repository: https://github.com/ThreatX/threat
 │       └── quality.yml            # Use Vale to check for style problems
 ├── .gitignore
 ├── .vscode
-│  └── tasks.json                  # Build the site, Check for problems, etc.
+│  └── tasks.json                  # Automation for authors and developers using VS Code
 ├── Gemfile
 ├── Gemfile.lock
-├── README                         # Using the documentation platform
+├── README
 │   ├── AUTHORS.adoc
 ├── README.adoc
-├── antora-assembler.yml          # Create PDFs for all pages during site generation
-├── antora-playbook-author.yml    # Playbook for local development and doc writers
-├── antora-playbook.yml           # Playbook to generate the site
-├── lib                           # Antora extensions (javascript)
+├── antora-assembler.yml              # Create PDFs for all pages during site generation
+├── antora-playbook-author.yml        # Generate the site using local doc sources / remote ui source
+├── antora-playbook.yml               # Playbook to generate the site
+├── lib                               # Antora extensions (javascript)
 ├── package-lock.json
 ├── package.json
 └── resources                     # Resources for PDF conversion
@@ -63,34 +69,16 @@ The UI for this site is in another repository: https://github.com/ThreatX/threat
     └── themes
         └── threatx-base-theme.yml
 ----
-****
-
-[#projects]
-.📂 Framework Projects
-****
-[horizontal]
-Site Playbook::
-* https://github.com/ThreatX/docs.threatx.com[docs.threatx.com]
-User Interface::
-* https://github.com/ThreatX/threatx-docs-ui[threatx-docs-ui]
-Doc Sources::
-* link:https://github.com/ThreatX/threatx-docs-txprevent[Prevent Product Docs]
-* link:https://github.com/ThreatX/threatx-docs-txprotect[Protect Product Docs]
-* link:https://github.com/ThreatX/threatx-docs-general[General Platform]
-Templates::
-* link:https://github.com/ThreatX/threatx-docs-component-template[Doc Component]
-****
-
 
 == Release process
 
 [.right]
 image::txdocs.png[Release Process]
 
-.🚀 Environments
+.🚀 Environment Site URLs
 [horizontal]
-🟢 Production:: `https://docs.threatx.com`
-🔵 Staging::  `http://docs-staging.threatx.com`
+Production:: `https://docs.threatx.com`
+Staging::  `http://docs-staging.threatx.com`
 
 When you are ready to update link:https://docs.threatx.com[docs.threatx.com] ...
 
@@ -173,7 +161,7 @@ TIP: You can also simply open `public/index.html` in your browser.
 ==== Building the User Interface bundle
 
 The Author Mode Playbook will download the latest release from link:https://github.com/ThreatX/threatx-docs-ui[]
-since3 its much less common for doc writers to be making changes there.
+since its much less common for doc writers to be making changes there.
 
 However, you can still use the same author playbook with a local build of the UI.
 
@@ -198,8 +186,6 @@ NOTE: These steps expect the `threatx-docs-ui` and `docs.threatx.com` repos to n
 $ npx antora --stacktrace --fetch --ui-bundle ../threatx-docs-ui/build/ui-bundle.zip
 ----
 
-
-=== Tooling
 
 
 [#links]

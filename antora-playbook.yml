@@ -1,4 +1,6 @@
-
+# 
+# Antora site playbook - production
+#  
 runtime:
   cache_dir: ./.cache/antora
   log:
@@ -32,28 +34,52 @@ asciidoc:
   extensions:
     - asciidoctor-emoji
   attributes:
-    experimental: true
-    hide-uri-scheme: '@'
-    idprefix: ''
-    idseparator: '-'
-    page-pagination: ''
-    table-frame: 'none@'
-    table-grid: 'rows@'
-    table-stripes: even
-    copyright: '© Copyright 2024 ThreatX, Inc.'
-    orgname: ThreatX
-    tip-caption: 💡 TIP
-    note-caption: ℹ NOTE
-    warning-caption: ⚠️ WARNING
-    error-caption: ❌ ERROR
-    important-caption: ❕ IMPORTANT
-    # Custom attributes
-    organization: ThreatX
-    txprevent-current-version: '1.1'
-    txprotect-current-version: '3.20'
-    page-txprevent-current-version: '1.1'
-    page-txprotect-current-version: '3.20'
-    url-txapi: 'https://api.threatx.com/tx_api/v2'
+      #-----------------------
+      # Asciidoctor attributes
+      #-----------------------
+      experimental: true
+      # TOC
+      toclevels: 4
+      # Sections
+      sectlinks: true
+      sectanchors: true
+      sectids: true
+      # Fonts
+      icons: font
+      # Syntax highlighting
+      source-highlighter: highlight.js
+      # URIs
+      hide-uri-scheme: '@'
+      # anchors
+      idprefix: ''
+      idseparator: '-'
+      # Tables
+      table-frame: 'none@'
+      table-grid: 'rows@'
+      table-stripes: even
+      # Captions 
+      tip-caption: 💡 TIP
+      note-caption: ℹ NOTE
+      warning-caption: ⚠️ WARNING
+      error-caption: ❌ ERROR
+      important-caption: ❕ IMPORTANT
+      # Organization details
+      copyright: '© Copyright 2024 ThreatX, Inc.'
+      orgname: ThreatX
+
+      #------------------
+      # Custom attributes
+      #------------------
+      organization: ThreatX
+      # Versions
+      txprevent-current-version: '1.1'
+      txprotect-current-version: '3.20'
+      # URLs
+      url-txapi: 'https://api.threatx.com/tx_api/v2'
+      # For Antora
+      page-pagination: ''
+      page-txprevent-current-version: '1.1'
+      page-txprotect-current-version: '3.20'
 
 antora:
   extensions: 
@@ -69,7 +95,7 @@ antora:
       enabled: true
       require: ./lib/print-defined-asciidoc-attributes-extension.js
     - id: all-pages-report
-      enabled: true
+      enabled: false
       require: ./lib/all-pages-report-extension.js
   
 output:

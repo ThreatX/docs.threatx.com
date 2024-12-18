@@ -1,4 +1,6 @@
-
+# 
+# Antora site playbook - Local doc source / Remote UI source
+#  
 runtime:
   cache_dir: ./.cache/antora
   log:
@@ -20,7 +22,6 @@ content:
     - url: ../threatx-docs-txprevent
       branches: HEAD
       start_path: docs
-
     - url: ../threatx-docs-general
       branches: HEAD
       start_path: docs
@@ -33,29 +34,52 @@ asciidoc:
   extensions:
     - asciidoctor-emoji
   attributes:
+      #-----------------------
+      # Asciidoctor attributes
+      #-----------------------
       experimental: true
+      # TOC
+      toclevels: 4
+      # Sections
+      sectlinks: true
+      sectanchors: true
+      sectids: true
+      # Fonts
+      icons: font
+      # Syntax highlighting
+      source-highlighter: highlight.js
+      # URIs
       hide-uri-scheme: '@'
+      # Anchors
       idprefix: ''
       idseparator: '-'
-      page-pagination: ''
+      # Tables
       table-frame: 'none@'
       table-grid: 'rows@'
       table-stripes: even
-      copyright: '© Copyright 2024 ThreatX, Inc.'
-      orgname: ThreatX
+      # Captions 
       tip-caption: 💡 TIP
       note-caption: ℹ NOTE
       warning-caption: ⚠️ WARNING
       error-caption: ❌ ERROR
       important-caption: ❕ IMPORTANT
+      # Organization details
+      copyright: '© Copyright 2024 ThreatX, Inc.'
+      orgname: ThreatX
+
+      #------------------
       # Custom attributes
+      #------------------
       organization: ThreatX
+      # Versions
       txprevent-current-version: '1.1'
       txprotect-current-version: '3.20'
+      # URLs
+      url-txapi: 'https://api.threatx.com/tx_api/v2'
+      # For Antora
+      page-pagination: ''
       page-txprevent-current-version: '1.1'
       page-txprotect-current-version: '3.20'
-      url-txapi: 'https://api.threatx.com/tx_api/v2'
-
 
 antora:
   extensions: 
@@ -71,9 +95,8 @@ antora:
       enabled: true
       require: ./lib/print-defined-asciidoc-attributes-extension.js
     - id: all-pages-report
-      enabled: true
+      enabled: false
       require: ./lib/all-pages-report-extension.js
-  
 
 output:
   clean: true
@@ -81,6 +104,6 @@ output:
 
 ui:
   bundle:
-    url: ../threatx-docs-ui/build/ui-bundle.zip
+    url: https://github.com/ThreatX/threatx-docs-ui/releases/latest/download/ui-bundle.zip
     snapshot: true
 
