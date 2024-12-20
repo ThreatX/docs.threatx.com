@@ -58,11 +58,14 @@ asciidoc:
       table-grid: 'rows@'
       table-stripes: even
       # Captions 
+      example-caption: 📌 Example
       tip-caption: 💡 TIP
-      note-caption: ℹ NOTE
+      note-caption: 📒 NOTE
       warning-caption: ⚠️ WARNING
-      error-caption: ❌ ERROR
-      important-caption: ❕ IMPORTANT
+      caution-caption: 🔥 CAUTION
+      error-caption:  ⁉️ERROR
+      important-caption: ❕IMPORTANT
+
       # Organization details
       copyright: '© Copyright 2024 ThreatX, Inc.'
       orgname: ThreatX
@@ -72,13 +75,13 @@ asciidoc:
       #------------------
       organization: ThreatX
       # Versions
-      txprevent-current-version: '1.1'
+      txprevent-current-version: '1.2'
       txprotect-current-version: '3.20'
       # URLs
       url-txapi: 'https://api.threatx.com/tx_api/v2'
       # For Antora
       page-pagination: ''
-      page-txprevent-current-version: '1.1'
+      page-txprevent-current-version: '1.2'
       page-txprotect-current-version: '3.20'
 
 antora:

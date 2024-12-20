@@ -45,6 +45,8 @@ heading:
   font-family: Montserrat
   font-style: bold
   font-color: #c1411e
+code:
+  font-family: RobotoMono
 code-block:
   font-family: RobotoMono
   font-style: normal
@@ -65,7 +67,7 @@ footer:
   line-height: 1
   recto:
     right:
-      content: '{section-or-chapter-title} | {page-number} of {page-count}'
+      content: '{page-number} of {page-count}'
   verso:
     left:
       content: '{page-number} of {page-count} | *{document-title}: {document-subtitle}*'
