@@ -70,6 +70,16 @@ These are the current documentation source repositories included in the site:
         └── threatx-base-theme.yml
 ----
 
+== Antora Playbook
+
+An `antora-playbook.yml` can be found in the project root and is responsible for generating a documentation site.
+
+It contains the instructions a user wants to relay to the Antora site generator. These instructions include the content Antora should collect and the UI it should apply to the generated site.
+
+The Antora build process will fetch a UI bundle (zip file) and multiple documentation sources (git repos).
+
+An additional playbook, `antora-playbook-author.yml`, builds from the `HEAD` of local source repos (relative to the playbook file).
+
 == Release process
 
 [.right]
@@ -91,7 +101,6 @@ When you are ready to update link:https://docs.threatx.com[docs.threatx.com] ...
 .. All 🔗links and #️⃣ anchors are checked
 
 
-
 == Build process
 
 === Install
@@ -102,12 +111,13 @@ When you are ready to update link:https://docs.threatx.com[docs.threatx.com] ...
 $ npm install
 ----
 
-.Install ruby dependencies
+.Install Ruby dependencies
 [,console]
 ----
 $ bundle config set path .bundle/gems
 $ bundle
 ----
+
 
 [TIP]
 .Callling project executables
@@ -117,45 +127,31 @@ $ bundle
 ====
 
 
-[#antora-playbook]
-=== Antora Playbook
+=== Generate Site
 
-An `antora-playbook.yml` can be found in the project root and is responsible for generating a documentation site.
+Build the site using one of the available playbooks (or your own).
 
-It contains the instructions a user wants to relay to the Antora site generator. These instructions include the content Antora should collect and the UI it should apply to the generated site.
-
-The Antora build process will fetch a UI bundle (zip file) and multiple documentation sources (git repos).
-
-.Generate the site
+.Build playbook
 [,console]
 ----
-$ npx antora --stacktrace --fetch antora-playbook.yml
+$ npm run build
 ----
 
-
-==== Author Mode
-
-Author mode uses the `HEAD` of _local git repos_.
-
-
-.Generate the site
+.Build author mode playbook
 [,console]
 ----
-$ npx antora --stacktrace --fetch antora-playbook-author.yml
+$ npm run author
 ----
 
-TIP: If you need more flexibility, copy the author playbook as the base for your own.
+TIP: The author mode playbook expects source content repos to be relative to the playbook file at `../threatx-docs-{txprevent,txprotect,txgeneral}`
 
 
-===== Previewing Author Mode Site
-
-.Serve the latest build output locally
+.Serve the site locally
 [,console]
 ----
-$ npx http-server ./public/
+$ npm run serve
 ----
 
-TIP: You can also simply open `public/index.html` in your browser.
 
 
 ==== Building the User Interface bundle
@@ -183,7 +179,9 @@ NOTE: These steps expect the `threatx-docs-ui` and `docs.threatx.com` repos to n
 .Build the author playbook with a local UI bundle
 [,console]
 ----
-$ npx antora --stacktrace --fetch --ui-bundle ../threatx-docs-ui/build/ui-bundle.zip
+$ npx antora --stacktrace --fetch \
+$    --ui-bundle-url ../threatx-docs-ui/build/ui-bundle.zip \
+$    antora-playbook-author.yml
 ----
 
 

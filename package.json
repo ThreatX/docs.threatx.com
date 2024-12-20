@@ -16,10 +16,8 @@
         "node-html-parser": "^6.1.13"
     },
     "scripts": {
-        "build": "npx antora --fetch --stacktrace antora-playbook.yml",
-        "author": "npx antora --fetch --stacktrace antora-playbook-author.yml",
-        "serve": "npx http-server ./public/",
-        "clean": "rm -rf ./build ./public ./.bundle ./node_modules ./.cache"
+        "build": "npx antora generate --stacktrace antora-playbook.yml",
+        "author": "npx antora generate --stacktrace antora-playbook-author.yml"
     },
     "repository": {
         "type": "git",
