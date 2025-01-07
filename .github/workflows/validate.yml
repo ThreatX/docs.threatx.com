@@ -10,7 +10,7 @@ on:
         description: Site to check
         options: 
         - https://docs.threatx.com
-        - http://docs-staging.threatx.com
+        - https://docs-staging.threatx.com
         default: 'https://docs.threatx.com'
   workflow_run:
     workflows:
