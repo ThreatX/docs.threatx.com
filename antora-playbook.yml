@@ -10,7 +10,7 @@ runtime:
     format: pretty
 
 site:
-  title: ThreatX Documentation
+  title: ThreatX Product Documentation
   start_page: txgeneral::index.adoc
   robots: allow
   url: https://docs.threatx.com

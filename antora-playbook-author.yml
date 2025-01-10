@@ -10,7 +10,7 @@ runtime:
     format: pretty
 
 site:
-  title: ThreatX Documentation
+  title: ThreatX Product Documentation
   start_page: txgeneral::index.adoc
   robots: allow
   url: http://localhost:8080
@@ -110,6 +110,6 @@ output:
 
 ui:
   bundle:
-    url: https://github.com/ThreatX/threatx-docs-ui/releases/latest/download/ui-bundle.zip
+    url: ../threatx-docs-ui/build/ui-bundle.zip
     snapshot: true
 
