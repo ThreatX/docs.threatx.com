@@ -23,7 +23,7 @@ urls:
 content:
   sources:
     - url: https://github.com/ThreatX/threatx-docs-txprevent.git
-      branches: ['1.1', '1.2']
+      branches: ['1.3']
       start_path: docs
     - url: https://github.com/ThreatX/threatx-docs-general.git
       branches: ['main']
@@ -77,13 +77,14 @@ asciidoc:
       #------------------
       organization: ThreatX
       # Versions
-      txprevent-current-version: '1.2'
+      txprevent-current-version: '1.3'
       txprotect-current-version: '3.20'
       # URLs
       url-txapi: 'https://api.threatx.com/tx_api/v2'
+      url-ctrlx: 'https://x.threatx.io'
       # For Antora
       page-pagination: ''
-      page-txprevent-current-version: '1.2'
+      page-txprevent-current-version: '1.3'
       page-txprotect-current-version: '3.20'
 
 antora:
